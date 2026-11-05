@@ -1,0 +1,13 @@
+
+{
+  "name": "wtex10",
+  "version": "1.0.0",
+  "description": "Web Technology Experiment 10 - Node.js and MongoDB",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "mongodb": "^6.0.0"
+  }
+}

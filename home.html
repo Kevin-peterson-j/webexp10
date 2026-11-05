@@ -1,0 +1,191 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Form</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: white;
+            color: blue;
+            margin: 0;
+            padding: 30px 15px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 26px;
+            margin-bottom: 30px;
+        }
+
+        form {
+            width: 420px;
+            max-width: 100%;
+            margin: auto;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 135px 1fr;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        label {
+            font-size: 14px;
+        }
+
+        .required {
+            color: red;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="number"],
+        input[type="tel"],
+        input[type="email"],
+        select {
+            box-sizing: border-box;
+            width: 100%;
+            padding: 5px;
+        }
+
+        .choices {
+            color: blue;
+            font-size: 13px;
+        }
+
+        .choices label {
+            white-space: nowrap;
+        }
+
+        .submit-row {
+            text-align: center;
+            margin-top: 28px;
+        }
+
+        button {
+            padding: 6px 18px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 450px) {
+            .form-row {
+                grid-template-columns: 100px 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1>User Registration Form</h1>
+
+    <form action="/server" method="POST">
+        <div class="form-row">
+            <label for="name">Name<span class="required">*</span></label>
+            <input type="text" id="name" name="name"
+                   required minlength="2" maxlength="60">
+        </div>
+
+        <div class="form-row">
+            <label for="password">Password<span class="required">*</span></label>
+            <input type="password" id="password" name="password"
+                   required minlength="6" maxlength="72">
+        </div>
+
+        <div class="form-row">
+            <label for="age">Age<span class="required">*</span></label>
+            <input type="number" id="age" name="age"
+                   min="1" max="120" required>
+        </div>
+
+        <div class="form-row">
+            <label for="mobile">Mobile Number<span class="required">*</span></label>
+            <input type="tel" id="mobile" name="mobile"
+                   pattern="[0-9]{10}" maxlength="10"
+                   title="Enter a 10-digit mobile number" required>
+        </div>
+
+        <div class="form-row">
+            <label for="email">Email<span class="required">*</span></label>
+            <input type="email" id="email" name="email" required
+                   maxlength="254">
+        </div>
+
+        <div class="form-row">
+            <label>Gender<span class="required">*</span></label>
+            <div class="choices">
+                <label>
+                    <input type="radio" name="gender" value="Male" required>
+                    Male
+                </label>
+                <label>
+                    <input type="radio" name="gender" value="Female">
+                    Female
+                </label>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="state">State<span class="required">*</span></label>
+            <select id="state" name="state" required>
+                <option value="">Select State</option>
+                <option>Andhra Pradesh</option>
+                <option>Karnataka</option>
+                <option>Kerala</option>
+                <option>Tamil Nadu</option>
+                <option>Telangana</option>
+                <option>Maharashtra</option>
+                <option>Delhi</option>
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label>Skills<span class="required">*</span></label>
+            <div class="choices">
+                <label>
+                    <input type="checkbox" name="skills" value="Java Script">
+                    Java Script
+                </label>
+                <label>
+                    <input type="checkbox" name="skills" value="Python">
+                    Python
+                </label>
+                <label>
+                    <input type="checkbox" name="skills" value="C++">
+                    C++
+                </label>
+                <label>
+                    <input type="checkbox" name="skills" value="Java">
+                    Java
+                </label>
+            </div>
+        </div>
+
+        <div class="submit-row">
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+    <script>
+        // Require at least one skill to be selected.
+        const form = document.querySelector("form");
+        const skillBoxes = document.querySelectorAll(
+            'input[name="skills"]'
+        );
+
+        form.addEventListener("submit", function (event) {
+            const selected = [...skillBoxes].some(box => box.checked);
+
+            if (!selected) {
+                event.preventDefault();
+                alert("Please select at least one skill.");
+            }
+        });
+    </script>
+</body>
+</html>
